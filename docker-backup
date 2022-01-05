@@ -5,10 +5,10 @@ if [ -z "$1" ]; then
     return 1
 fi
 
-docker run -it --rm                     \
+docker run -it --rm                 \
     -e PUID="$(id -u $(whoami))"    \
     -e PGID="$(id -g $(whoami))"    \
     -e ARCHIVE_NAME="$1"            \
-    -v $1:/voldata                  \
+    -v $1:/vols/$1                       \
     -v $(pwd):/backup               \
     ghcr.io/tkreind/docker-volume-archiver:master
