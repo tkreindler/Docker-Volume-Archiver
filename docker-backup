@@ -1,0 +1,14 @@
+#!/bin/sh
+
+if [ -z "$1" ]; then
+    echo "Usage: docker-backup <volume_name>" 1>&2
+    return 1
+fi
+
+docker run -it --rm                     \
+    -e PUID="$(id -u $(whoami))"    \
+    -e PGID="$(id -g $(whoami))"    \
+    -e ARCHIVE_NAME="$1"            \
+    -v $1:/voldata                  \
+    -v $(pwd):/backup               \
+    test

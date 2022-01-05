@@ -1,0 +1,34 @@
+#!/bin/sh
+
+outfile=/backup/${ARCHIVE_NAME}_backup_$(date "+%Y-%m-%d-%T").tar.br
+
+echo "Creating tar"
+
+# send to temprary tar file
+tar cf /tmp/temptar.tar -C / /voldata
+
+function createArchive() {
+    echo "Archiving as brotli"
+    # create brotli archive, monitoring progress with pv
+    pv -f "/tmp/temptar.tar" | brotli -Z -o $outfile
+
+    # change permissions correctly
+
+    echo "Applying permissions changes"
+    chown $PUID:$PGID $outfile
+    chmod 600 $outfile
+}
+
+# run in subprocess to gracefully handle interrupts
+createArchive &
+child_id=$!
+
+function cleanup() {
+    printf "Stopping..."
+    kill $child_id
+    rm $outfile
+}
+
+trap cleanup SIGINT SIGTERM
+
+wait

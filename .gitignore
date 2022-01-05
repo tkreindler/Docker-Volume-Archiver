@@ -1,0 +1,6 @@
+*.tar.*
+*.br
+*.gz
+*.xz
+*.tgz
+.DS_Store
