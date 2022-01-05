@@ -1,13 +1,12 @@
-#!/bin/bash
+#!/bin/sh
 
 outfile=/backup/${ARCHIVE_NAME}_backup_$(date "+%Y-%m-%d-%T").tar.br
 
 echo "Creating tar"
 
 # send to temprary tar file
-pushd /vols/
+cd /vols/
 tar cf /tmp/temptar.tar ${ARCHIVE_NAME}
-popd
 
 function createArchive() {
     echo "Archiving as brotli"

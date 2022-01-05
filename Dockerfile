@@ -1,6 +1,6 @@
 FROM alpine:latest
 
-RUN apk add --no-cache pv tar brotli bash
+RUN apk add --no-cache pv tar brotli
 
 COPY src/archive_directory /usr/local/bin/archive_directory
 
