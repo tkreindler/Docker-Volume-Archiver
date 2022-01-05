@@ -11,4 +11,4 @@ docker run -it --rm                     \
     -e ARCHIVE_NAME="$1"            \
     -v $1:/voldata                  \
     -v $(pwd):/backup               \
-    test
+    ghcr.io/tkreind/docker-volume-archiver:master
