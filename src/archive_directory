@@ -5,7 +5,7 @@ outfile=/backup/${ARCHIVE_NAME}_backup_$(date "+%Y-%m-%d-%T").tar.br
 echo "Creating tar"
 
 # send to temprary tar file
-tar cf /tmp/temptar.tar -C /vols/ /vols/${ARCHIVE_NAME}
+tar cf /tmp/temptar.tar /vols/${ARCHIVE_NAME}
 
 function createArchive() {
     echo "Archiving as brotli"
